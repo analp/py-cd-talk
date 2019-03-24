@@ -99,6 +99,7 @@ class Flag(metaclass=abc.ABCMeta):
 
             if self._check():
                 return target(*args, **kwargs)
+            return None
 
         return wrapper
 
