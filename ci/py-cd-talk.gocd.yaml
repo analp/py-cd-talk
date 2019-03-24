@@ -1,0 +1,60 @@
+environments:
+  flags:
+    pipelines:
+      - continuous
+    agents:
+      - fbd37ad3-b2fc-4a22-9106-0a76bc7257ad
+      - 36e2b7ab-6f76-4da9-935a-49b56d03f48c
+      - 8d18d6f8-892e-4c90-9ced-6c340bd18677
+pipelines:
+  continuous:
+    group: flags
+    materials:
+      source:
+        scm: d7aca22e-46f7-401a-993c-a0bb0bd86c1b
+        blacklist:
+          - master
+    stages:
+      - linting:
+          jobs:
+            linting:
+              tasks:
+               - exec:
+                   command: tox
+                   arguments:
+                     - "-e linting"
+            security:
+              tasks:
+                - exec:
+                   command: tox
+                   arguments:
+                     - "-e security"
+      - unit:
+          jobs:
+            tests_pypy3:
+              artifacts:
+                - test:
+                    source: report.xml
+              tasks:
+                - exec:
+                    run_if: passed
+                    command: tox
+                    arguments:
+                      - "-e pypy3-nocov"
+                      - "--"
+                      - "-m unit"
+                      - "--junitxml=report.xml"
+            tests_py36:
+              artifacts:
+                - test:
+                    source: report.xml
+              tasks:
+                - exec:
+                    run_if: passed
+                    command: tox
+                    arguments:
+                      - "-e py36-nocov"
+                      - "--"
+                      - "-m unit"
+                      - "--junitxml=report.xml"
+ 

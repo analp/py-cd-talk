@@ -1,0 +1,9 @@
+include LICENCE
+include *.ini
+
+prune .pkgfiles
+prune ci
+
+recursive-include src *.py
+
+global-exclude *.py[cod] __pycache__
