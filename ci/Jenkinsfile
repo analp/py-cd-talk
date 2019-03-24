@@ -43,7 +43,7 @@ def tests_pipeline(def interpreter, def cov_option, def all) {
     }
 }
 
-interpreters = ["pypy3", "py36"]
+interpreters = ["py35"]
 
 def quick_build(def cov_option) {
     checkout scm
@@ -125,15 +125,8 @@ node() {
             break
 
         case 'develop':
-            if (isTimerTriggered) {
-                stage {
-                    sh "tox -e pypy3-benchmarks"
-                }
-                deleteDir()
-            } else {
-                full_build()
-                deleteDir()
-            }
+            full_build()
+            deleteDir()
             break
         default:
             if (!isTimerTriggered) {
