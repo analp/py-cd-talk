@@ -69,7 +69,7 @@ class Flag(metaclass=abc.ABCMeta):
         ]
 
     def __str__(self):
-        return f"<Flag({self.name}={self.value})>"
+        return "<Flag({}={})>".format(self.name, self.value)
 
     def __bool__(self):
         return self._check()

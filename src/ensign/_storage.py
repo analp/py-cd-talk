@@ -81,7 +81,7 @@ class SQLStorage:
         Load a flag's value given its name. Updates the last used date.
         """
 
-        field = f"value_{flagtype.value}"
+        field = "value_{}".format(flagtype.value)
 
         with self.connection.begin():
             query = sa.select([self.flags.c.get(field)]).\
@@ -100,7 +100,7 @@ class SQLStorage:
         Store a new value for a flag, given its name.
         """
 
-        field = f"value_{flagtype.value}"
+        field = "value_{}".format(flagtype.value)
 
         query = self.flags.update().\
             where(self.flags.c.name == name).\

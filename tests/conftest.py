@@ -54,14 +54,14 @@ class FakeStorage:
         Load a flag's value from the store, given its name.
         """
 
-        return self.STORE[name][f"value_{flagtype.value}"]
+        return self.STORE[name]["value_{}".format(flagtype.value)]
 
     def store(self, name, value, flagtype):
         """
         Store a flag's value to the store, given its name.
         """
 
-        self.STORE[name][f"value_{flagtype.value}"] = value
+        self.STORE[name]["value_{}".format(flagtype.value)] = value
 
     def used(self, name):
         """

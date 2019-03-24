@@ -84,7 +84,7 @@ def test_benchmark_api_get(benchmark, db, api):
 @pytest.mark.benchmark
 def test_benchmark_api_get_all(benchmark, db, api):
     for k in range(100):
-        BinaryFlag.create(f"flag{k}")
+        BinaryFlag.create("flag{}".format(k))
     benchmark(api.get, "/flags", status=200)
 
 
