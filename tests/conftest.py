@@ -175,7 +175,7 @@ def pytest_runtest_setup(item):
     Otherwise, skip them.
     """
 
-    marker = item.get_marker("spec")
+    marker = item.get_closest_marker("spec")
     if item.config.getoption("--specs"):
         if marker is None:
             pytest.skip()
